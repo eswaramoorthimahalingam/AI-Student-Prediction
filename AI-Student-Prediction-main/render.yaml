@@ -18,7 +18,7 @@ services:
       - key: FRONTEND_URL
         sync: true
       - key: AI_SERVICE_URL
-        sync: true
+        value: https://ai-student-prediction-model.onrender.com
   - type: web
     name: ai-student-prediction-model
     runtime: python
