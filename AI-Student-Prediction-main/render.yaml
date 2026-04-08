@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: ai-student-prediction-api
+    runtime: node
+    rootDir: student-performance-system/backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOW_ADMIN_REGISTRATION
+        value: true
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: true
+      - key: AI_SERVICE_URL
+        sync: true
+  - type: web
+    name: ai-student-prediction-model
+    runtime: python
+    rootDir: student-performance-system/ai-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /health
